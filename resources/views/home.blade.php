@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('content')
+    <script>
+        function turnOnCamera(src) {
+            document.getElementById('camera').src = src;
+        }
+
+    </script>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <div class="sidenav">
@@ -18,13 +24,18 @@
     <div class="main">
         <div class="container">
             <div>
-                <div class="btns">
-                    <img
-                        src="<?=getenv('CAMERA_HOST').getenv('CAMERA_VIDEO')?>" alt="">
-                    <button>Turn on camera</button>
-                    <button>Check number</button>
-                </div>
+                <form>
+                    <div class="btns">
+                        <img id="camera" alt="">
+                        <span
+                            onclick="turnOnCamera('<?=getenv('CAMERA_HOST').getenv('CAMERA_VIDEO')?>')">
+                            Turn on camera
+                        </span>
+                        <button>Check number</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
 @endsection
