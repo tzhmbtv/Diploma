@@ -19,7 +19,8 @@
         <div class="container">
             <div>
                 <div class="btns">
-                    <img src="http://10.136.143.219/live"/>
+                    <img
+                        src="<?=getenv('CAMERA_HOST').getenv('CAMERA_VIDEO')?>" alt="">
                     <button>Turn on camera</button>
                     <button>Check number</button>
                 </div>
