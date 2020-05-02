@@ -109,7 +109,7 @@ body {
 
 
 .main_team{
-  margin-left: 60px;
+  margin-left: 25px;
 }
 
 .our_team{
@@ -124,7 +124,7 @@ body {
 }
 
 .member_cards{
-  margin-left: 50px;
+  margin-left: 70px;
 }
 
 .member_card {
@@ -150,10 +150,8 @@ body {
 
 .main_history{
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  margin-left: 40px;
-  margin-top: 10px;
-  width: 93%;
-  height: 32rem;
+  margin-left: 12px;
+  height: 33rem;
   border-radius: 3px;
   background-color: white;
   overflow: auto;
@@ -222,10 +220,8 @@ table {
 
 .main_home{
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  margin-left: 40px;
-  margin-top: 10px;
-  width: 93%;
-  height: 32rem;
+  margin-left: 12px;
+  height: 33rem;
   border-radius: 3px;
   background-color: white;
 }

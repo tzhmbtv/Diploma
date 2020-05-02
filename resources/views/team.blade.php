@@ -2,8 +2,8 @@
 @extends('layouts.sidenav')
 
 @section('content')
-    <div class="container" style="margin-right: auto; margin-left:auto;">
-        <div class="main_team">
+    <div class="container">
+        <div class="main_team col-sm col-md col-lg col-xl">
             <div class="our_team">
                 <p><span class="our">Our</span> Team</p>
             </div>

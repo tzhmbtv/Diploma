@@ -2,8 +2,8 @@
 @extends('layouts.sidenav')
 
 @section('content')
-    <div class="container" style="margin-right: auto; margin-left:auto;">
-        <div class="main_history">
+    <div class="container">
+        <div class="main_history col-sm col-md col-lg col-xl">
             <div class="visit_title">
                 <p><span>V</span>isit history</p>
             </div>
