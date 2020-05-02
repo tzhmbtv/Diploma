@@ -148,7 +148,7 @@ body {
   border-radius: 50%;
 }
 
-.main_history{
+.main_history, .main_home, .main_company{
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
   margin-left: 12px;
   height: 33rem;
@@ -218,14 +218,6 @@ table {
    text-align: center;
  }
 
-.main_home{
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  margin-left: 12px;
-  height: 33rem;
-  border-radius: 3px;
-  background-color: white;
-}
-
 .btns{
   padding: 40% 0px 0px 21%;
 }
@@ -233,6 +225,20 @@ table {
 .btns button{
   width: 200px;
   margin-left: 4rem;
+}
+
+.company_form{
+  margin-top: 5rem;
+  margin-right: 30rem;
+}
+
+.company_form .form-control{
+  width: 150%;
+  margin-top: 20px;
+}
+
+.company_form label{
+  margin-top: 20px;
 }
 
 h1,
@@ -2329,7 +2335,7 @@ pre code {
   background-color: #fff;
   border-color: #a1cbef;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 0.1rem #702219;
 }
 
 .form-control::-webkit-input-placeholder {

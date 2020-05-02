@@ -33,3 +33,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::view('/history', 'history');
 
 Route::view('/team', 'team');
+
+Route::view('/company', 'company');
