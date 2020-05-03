@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
                 'name'       => 'Входные ворота',
                 'address_id' => '1',
                 'camera_ip'  => 'http://192.168.1.109:8080/',
-                'photo_uri'  => 'shot.jpg',
+                'photo_uri'  => 'photo.jpg',
             ]);
         }
 

@@ -32,7 +32,7 @@ class Camera
      */
     public function getImage()
     {
-        $this->imageAsString = file_get_contents("C:\\Users\\User\\Downloads\\nomera-main-1193x671.jpg");
+        $this->imageAsString = file_get_contents($this->gate->getCameraIp().$this->gate->getPhotoUri());
 
         return $this->imageAsString;
     }
