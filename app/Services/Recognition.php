@@ -1,15 +1,10 @@
 <?php
-/**
- * @package Chocolife.me
- * @author  Moldabayev Vadim <moldabayev.v@chocolife.kz>
- */
 
 namespace App\Services;
 
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 
 class Recognition

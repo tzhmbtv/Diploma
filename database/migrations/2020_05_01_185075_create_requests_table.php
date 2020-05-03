@@ -16,7 +16,7 @@ class CreateRequestsTable extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('gate_id');
-            $table->text('request_image_url');
+            $table->longText('request_image_url');
             $table->json('response_from_nrp');
             $table->timestamps();
             $table->foreign('gate_id')

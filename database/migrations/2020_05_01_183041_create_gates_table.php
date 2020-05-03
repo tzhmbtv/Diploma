@@ -17,14 +17,14 @@ class CreateGatesTable extends Migration
             $table->id();
             $table->integer('number');
             $table->string('name');
-            $table->unsignedBigInteger('address_company_id');
+            $table->unsignedBigInteger('address_id');
             $table->ipAddress('camera_ip');
             $table->string('photo_uri');
             $table->timestamps();
 
-            $table->foreign('address_company_id')
+            $table->foreign('address_id')
                 ->references('id')
-                ->on('addresses_companies')
+                ->on('addresses')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });

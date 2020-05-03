@@ -11,5 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Car extends Model
 {
-    //
+    public function gates()
+    {
+        return $this->belongsToMany('App\Models\Gate');
+    }
 }

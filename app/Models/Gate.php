@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,34 +13,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Gate extends Model
 {
-
-    /**
-     * @var string
-     */
-    private $camera_ip;
-    /**
-     * @var string
-     */
-    private $photo_uri;
-    /**
-     * @var int
-     */
-    private $id;
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
     /**
      * @return string
      */
     public function getPhotoUri(): string
     {
-        return $this->photo_uri;
+        return $this->attributes['photo_uri'];
     }
 
     /**
@@ -49,7 +26,7 @@ class Gate extends Model
      */
     public function setPhotoUri(string $photo_uri): void
     {
-        $this->photo_uri = $photo_uri;
+        $this->attributes['photo_uri'] = $photo_uri;
     }
 
     /**
@@ -57,7 +34,7 @@ class Gate extends Model
      */
     public function getCameraIp(): string
     {
-        return $this->camera_ip;
+        return $this->attributes['camera_ip'];
     }
 
     /**
@@ -65,7 +42,11 @@ class Gate extends Model
      */
     public function setCameraIp(string $camera_ip): void
     {
-        $this->camera_ip = $camera_ip;
+        $this->attributes['camera_ip'] = $camera_ip;
     }
 
+    public function cars()
+    {
+        return $this->belongsToMany('App\Models\Car');
+    }
 }

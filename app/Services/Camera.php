@@ -8,10 +8,6 @@ use GuzzleHttp\Client;
 class Camera
 {
     /**
-     * @var Client
-     */
-    private $client;
-    /**
      * @var Gate
      */
     private $gate;
@@ -29,9 +25,6 @@ class Camera
     public function __construct(Gate $gate)
     {
         $this->gate   = $gate;
-        $this->client = new Client(
-            ['base_uri' => $gate->getCameraIp()]
-        );
     }
 
     /**
@@ -39,13 +32,9 @@ class Camera
      */
     public function getImage()
     {
-        $result              = $this->client->request(
-            "GET",
-            $this->gate->getPhotoUri()
-        )->getBody()->getContents();
-        $this->imageAsString = $result;
+        $this->imageAsString = file_get_contents("C:\\Users\\User\\Downloads\\nomera-main-1193x671.jpg");
 
-        return $result;
+        return $this->imageAsString;
     }
 
     /**
@@ -53,7 +42,7 @@ class Camera
      */
     public function getGateId()
     {
-        return $this->gate->getId();
+        return $this->gate->attributesToArray()['id'];
     }
 
     /**
@@ -61,6 +50,6 @@ class Camera
      */
     public function getImageAsString()
     {
-        return $this->imageAsString;
+        return base64_encode($this->imageAsString);
     }
 }

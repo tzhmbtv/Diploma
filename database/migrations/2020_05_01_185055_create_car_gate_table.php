@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarsGatesTable extends Migration
+class CreateCarGateTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCarsGatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cars_gates', function (Blueprint $table) {
+        Schema::create('car_gate', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('gate_id');

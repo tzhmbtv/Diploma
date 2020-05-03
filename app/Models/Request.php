@@ -12,25 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 class Request extends Model
 {
     /**
-     * @var integer
-     */
-    private $gate_id;
-    /**
-     * @var string
-     */
-    private $request_image_url;
-
-    /**
-     * @var string
-     */
-    private $response_from_nrp;
-
-    /**
      * @return int
      */
     public function getGateId(): int
     {
-        return $this->gate_id;
+        return $this->attributes['gate_id'];
     }
 
     /**
@@ -38,7 +24,7 @@ class Request extends Model
      */
     public function setGateId(int $gate_id): void
     {
-        $this->gate_id = $gate_id;
+        $this->attributes['gate_id'] = $gate_id;
     }
 
     /**
@@ -46,7 +32,7 @@ class Request extends Model
      */
     public function getRequestImageUrl(): string
     {
-        return $this->request_image_url;
+        return $this->attributes['request_image_url'];
     }
 
     /**
@@ -54,7 +40,7 @@ class Request extends Model
      */
     public function setRequestImageUrl(string $request_image_url): void
     {
-        $this->request_image_url = $request_image_url;
+        $this->attributes['request_image_url'] = $request_image_url;
     }
 
     /**
@@ -62,7 +48,8 @@ class Request extends Model
      */
     public function getResponseFromNrp(): string
     {
-        return $this->response_from_nrp;
+        return $this->attributes['response_from_nrp'];
+
     }
 
     /**
@@ -70,6 +57,6 @@ class Request extends Model
      */
     public function setResponseFromNrp(string $response_from_nrp): void
     {
-        $this->response_from_nrp = $response_from_nrp;
+        $this->attributes['response_from_nrp'] = $response_from_nrp;
     }
 }
