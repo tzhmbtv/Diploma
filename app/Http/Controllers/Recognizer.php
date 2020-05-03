@@ -2,68 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Pool;
-use GuzzleHttp\Psr7\Request as RequestAlias;
+use App\Models\Gate;
+use App\Services\Camera;
+use App\Services\Recognition;
+use App\Models\Request as Log;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class Recognizer extends Controller
 {
+    /**
+     * @var Recognition
+     */
+    private $recognizer;
+    /**
+     * @var Camera
+     */
+    private $camera;
 
+    /**
+     * @param Request $request
+     *
+     * @return array|string[]
+     * @throws ValidationException
+     */
     public function recognizeAction(Request $request)
     {
-        $image = $this->getImage();
+        $this->validate($request, ['gate_id' => 'integer|required']);
 
-        return $this->sendRequest($image);
-    }
+        $gate_id = $request->get('gate_id');
+        $image   = $this->getImage($gate_id);
+        $number  = $this->getNumber($image);
 
-    private function sendRequest($image)
-    {
-        try {
-            $client = new Client(['base_uri' => getenv('RECOGNIZER_HOST').":".getenv("RECOGNIZER_PORT")]);
-            $header = ['x-api-key' => getenv('RECOGNIZER_KEY')];
-            $result = $client->request(
-                "POST",
-                'recognition',
-                ['body' => $image, 'headers' => $header])
-                ->getBody()->getContents();
+        $this->log();
 
-            return json_decode($result, true);
-        } catch (ConnectException $exception) {
-            Log::error($exception->getMessage(), $exception->getTrace());
-
-            return ['Cannot connect'];
-        }
-
-
-    }
-
-    private function sendRequestAsync($image)
-    {
-        $client   = new Client(['base_uri' => getenv('RECOGNIZER_HOST').":".getenv("RECOGNIZER_PORT")]);
-        $requests = [];
-        $header   = ['x-api-key' => getenv('RECOGNIZER_KEY')];
-
-        for ($i = 0; $i < 3; $i++) {
-            $requests[] = new RequestAlias("POST",
-                "/recognition",
-                $header,
-                $image);
-        }
-        $pool = new Pool($client, $requests, []);
-        foreach ($pool->batch($client, $requests, []) as $item) {
-            var_dump($item->getBody()->getContents());
-        }
-        die;
+        return $number;
     }
 
     /**
+     * @param $image
+     *
+     * @return string[]
+     */
+    private function getNumber($image)
+    {
+        $this->recognizer = new Recognition();
+        $this->recognizer->setImage($image);
+
+        return $this->recognizer->getNumber();
+    }
+
+    /**
+     * @param $gate_id
+     *
      * @return string
      */
-    private function getImage()
+    private function getImage($gate_id)
     {
-        return file_get_contents(getenv("CAMERA_HOST").getenv('CAMERA_PHOTO'));
+        $gate         = Gate::find($gate_id);
+        $this->camera = new Camera($gate);
+
+        return $this->camera->getImage();
+    }
+
+    private function log()
+    {
+        $request = new Log();
+        $request->setGateId($this->camera->getGateId());
+        $request->setResponseFromNrp($this->recognizer->getResponse());
+        $request->setRequestImageUrl($this->camera->getImageAsString());
+        $request->save();
     }
 }

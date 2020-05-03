@@ -19,6 +19,7 @@ class CreateGatesTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('address_company_id');
             $table->ipAddress('camera_ip');
+            $table->string('photo_uri');
             $table->timestamps();
 
             $table->foreign('address_company_id')
