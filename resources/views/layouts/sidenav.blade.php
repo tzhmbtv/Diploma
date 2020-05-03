@@ -10,6 +10,7 @@
     <a href="{{ url('/home') }}"><img src="img/home.png" width="35" height="35">Home</a>
     <a href="{{ url('/history') }}"><img src="img/history.png" width="35" height="35">History</a>
     <a href="{{ url('/team') }}"><img src="img/team.png" width="35" height="35">Team</a>
+    <a href="{{ url('/company') }}"><img src="img/company.png" width="35" height="35">Company</a>
 </div>    
 </body>
 </html>
