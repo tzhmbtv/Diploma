@@ -37,21 +37,15 @@ class Recognition
      */
     public function getNumber()
     {
-        try {
-            $result = $this->client->request(
-                "POST",
-                'recognition',
-                ['body' => $this->image, 'headers' => $this->header])
-                ->getBody()->getContents();
+        $result = $this->client->request(
+            "POST",
+            'recognition',
+            ['body' => $this->image, 'headers' => $this->header])
+            ->getBody()->getContents();
 
-            $this->response = $result;
+        $this->response = $result;
 
-            return json_decode($result, true);
-        } catch (ConnectException $exception) {
-            Log::error($exception->getMessage(), $exception->getTrace());
-
-            return ['Cannot connect'];
-        }
+        return json_decode($result, true);
     }
 
     /**

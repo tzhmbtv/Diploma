@@ -8,9 +8,8 @@ use App\Models\Gate;
 use App\Services\Camera;
 use App\Services\Recognition;
 use App\Services\RequestLogger;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Mockery\Exception;
 
 class Recognizer extends Controller
@@ -31,6 +30,8 @@ class Recognizer extends Controller
 
             return $this->isAvailableToEnter($number['plateNumber'], $gate->id);
         } catch (Exception $exception) {
+            Log::error(print_r(['Message' => $exception->getMessage(), 'Trace' => $exception->getTraceAsString()]));
+
             return false;
         }
     }

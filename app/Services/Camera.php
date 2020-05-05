@@ -22,7 +22,7 @@ class Camera
     /**
      * @return string
      */
-    public function getImage()
+    public function getImage(): string
     {
         return file_get_contents($this->gate->getCameraIp().$this->gate->getPhotoUri());
     }
