@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Log;
 
 class Recognition
 {
-    private $client;
-    private $image;
-    private $header;
-    private $response;
+    private Client $client;
+    private string $image;
+    private array  $header;
+    private string $response;
 
     public function __construct()
     {

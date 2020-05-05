@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Car
  *
  * @package App\Models
+ * @mixin Builder
  */
 class Car extends Model
 {

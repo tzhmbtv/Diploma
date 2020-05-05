@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Request
  *
+ *
  * @package App\Models
+ * @mixin Builder
  */
 class Request extends Model
 {

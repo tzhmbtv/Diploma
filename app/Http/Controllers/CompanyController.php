@@ -55,6 +55,6 @@ class CompanyController extends Controller
 
     private function getSingleCompany(int $companyId)
     {
-        Company::find();
+        Company::find($companyId);
     }
 }

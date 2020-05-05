@@ -7,39 +7,32 @@ use App\Models\Car\Enter;
 use App\Models\Gate;
 use App\Services\Camera;
 use App\Services\Recognition;
-use App\Models\Request as Log;
+use App\Services\RequestLogger;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
+use Mockery\Exception;
 
 class Recognizer extends Controller
 {
     /**
-     * @var Recognition
-     */
-    private $recognizer;
-    /**
-     * @var Camera
-     */
-    private $camera;
-
-    /**
      * @param Request $request
      *
-     * @return array|string[]
-     * @throws ValidationException
+     * @return bool
      */
     public function recognizeAction(Request $request)
     {
-        $this->validate($request, ['gate_id' => 'integer|required']);
+        $sensor_ip = $request->getClientIp();
+        try {
+            $gate   = $this->getGateBySensorIp($sensor_ip);
+            $image  = $this->getImage($gate);
+            $number = $this->getNumber($image);
+            RequestLogger::logRequestToNpr($gate->id, $number, $image);
 
-        $gate_id = $request->get('gate_id');
-        $image   = $this->getImage($gate_id);
-        $number  = $this->getNumber($image);
-
-        $this->log();
-
-        return $this->checkAvailabilityToCome(strtolower($number['plateNumber'])) ? ['success'] : ['error'];
+            return $this->isAvailableToEnter($number['plateNumber'], $gate->id);
+        } catch (Exception $exception) {
+            return false;
+        }
     }
 
     /**
@@ -49,83 +42,42 @@ class Recognizer extends Controller
      */
     private function getNumber($image)
     {
-        $this->recognizer = new Recognition();
-        $this->recognizer->setImage($image);
+        $recognizer = new Recognition();
+        $recognizer->setImage($image);
 
-        return $this->recognizer->getNumber();
+        return $recognizer->getNumber();
     }
 
-    /**
-     * @param $gate_id
-     *
-     * @return string
-     */
-    private function getImage($gate_id)
+    private function getImage(Gate $gate)
     {
-        $gate         = Gate::find($gate_id);
-        $this->camera = new Camera($gate);
+        $camera = new Camera($gate);
 
-        return $this->camera->getImage();
+        return $camera->getImage();
     }
 
-    private function log()
+    public function isAvailableToEnter($number, int $gateId)
     {
-        $request = new Log();
-        $request->setGateId($this->camera->getGateId());
-        $request->setResponseFromNrp($this->recognizer->getResponse());
-        $request->setRequestImageUrl($this->camera->getImageAsString());
-        $request->save();
+        $car = Gate::find($gateId)->cars()
+            ->where('plate_number', '=', $number)
+            ->firstOrNew(['plate_number', '=', $number]);
+
+        $hasAccessToGate = $car->has_access === '1';
+        $this->logEnteringCarToGate($car->id, intval($car->has_access), $gateId);
+
+        return $hasAccessToGate;
     }
 
-    public function checkAvailabilityToCome($number)
-    {
-        $car = Gate::find($this->camera->getGateId())->cars()
-            ->where('plate_number', '=', strtolower($number))
-            ->first();
-        if (!is_null($car)) {
-            if ($car->has_access === '1') {
-                $this->logEntering($car->id, 1);
-
-                return true;
-
-            }
-            $this->logEntering($car->id, 0);
-
-            return false;
-        } else {
-            $carId = $this->createCar($number);
-            $this->createCarGate($carId);
-            $this->logEntering($carId, 0);
-        }
-
-        return false;
-    }
-
-    private function logEntering($carId, $hasEntered)
+    private function logEnteringCarToGate($carId, $hasEntered, $gateId)
     {
         $enter = new Enter();
         $enter->setAttribute('car_id', $carId);
-        $enter->setAttribute('gate_id', $this->camera->getGateId());
+        $enter->setAttribute('gate_id', $gateId);
         $enter->setAttribute('has_entered', $hasEntered);
         $enter->save();
     }
 
-    private function createCar($number)
+    private function getGateBySensorIp(string $sensor_ip): Gate
     {
-        $car = new Car();
-        $car->setAttribute('plate_number', $number);
-        $car->setAttribute('origin_gate_id', $this->camera->getGateId());
-        $car->save();
-
-        return $car->id;
-    }
-
-    private function createCarGate($carId)
-    {
-        DB::table('car_gate')->insert([
-            'car_id'     => $carId,
-            'gate_id'    => $this->camera->getGateId(),
-            'has_access' => 0,
-        ]);
+        return Gate::query()->where('sensor_ip', '=', $sensor_ip)->firstOrFail();
     }
 }
