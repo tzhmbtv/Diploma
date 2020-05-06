@@ -40,6 +40,6 @@ class CreateUsersGatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gates');
+        Schema::dropIfExists('users_gates');
     }
 }

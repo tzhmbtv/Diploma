@@ -41,6 +41,6 @@ class CreateCarGateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gates');
+        Schema::dropIfExists('car_gate');
     }
 }

@@ -10,7 +10,7 @@ use App\Services\Recognition;
 use App\Services\RequestLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Mockery\Exception;
+use Exception;
 
 class Recognizer extends Controller
 {
@@ -21,19 +21,25 @@ class Recognizer extends Controller
      */
     public function recognizeAction(Request $request)
     {
-        $sensor_ip = $request->getClientIp();
         try {
-            $gate   = $this->getGateBySensorIp($sensor_ip);
-            $image  = $this->getImage($gate);
-            $number = $this->getNumber($image);
+            $sensor_ip = $request->getClientIp();
+            $gate      = $this->getGateBySensorIp($sensor_ip);
+            $image     = $this->getImage($gate);
+            $number    = $this->getNumber($image);
+
             RequestLogger::logRequestToNpr($gate->id, $number, $image);
 
-            return $this->isAvailableToEnter($number['plateNumber'], $gate->id);
+            if ($this->isAvailableToEnter($number['plateNumber'], $gate->id)) {
+                return 'Success';
+            }
         } catch (Exception $exception) {
-            Log::error(print_r(['Message' => $exception->getMessage(), 'Trace' => $exception->getTraceAsString()]));
-
-            return false;
+            Log::error(print_r([
+                'Message' => $exception->getMessage(),
+                'Trace'   => $exception->getTraceAsString(),
+            ], true));
         }
+
+        return 'Error';
     }
 
     /**
@@ -58,9 +64,7 @@ class Recognizer extends Controller
 
     public function isAvailableToEnter($number, int $gateId)
     {
-        $car = Gate::find($gateId)->cars()
-            ->where('plate_number', '=', $number)
-            ->firstOrNew(['plate_number', '=', $number]);
+        $car = $this->findCarOrCreate($gateId, $number);
 
         $hasAccessToGate = $car->has_access === '1';
         $this->logEnteringCarToGate($car->id, intval($car->has_access), $gateId);
@@ -75,6 +79,20 @@ class Recognizer extends Controller
         $enter->setAttribute('gate_id', $gateId);
         $enter->setAttribute('has_entered', $hasEntered);
         $enter->save();
+    }
+
+    private function findCarOrCreate($gateId, $plateNumber)
+    {
+        $car = Gate::find($gateId)->cars()
+            ->where('plate_number', '=', $plateNumber)->first();
+
+        if (!$car) {
+            $car = new Car();
+            $car->setAttribute('plate_number', $plateNumber);
+            $car->setAttribute('origin_gate_id', $gateId);
+        }
+
+        return $car;
     }
 
     private function getGateBySensorIp(string $sensor_ip): Gate
