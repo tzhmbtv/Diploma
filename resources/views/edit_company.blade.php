@@ -2,9 +2,12 @@
 @extends('layouts.sidenav')
 
 @section('content')
-    <div class="container">
-        <div class="main_company col-sm col-md col-lg col-xl">
-            <div class="company_form">
+<div class="container">
+    <div class="main col-sm col-md col-lg col-xl">
+        <div class="title_company">
+            <h2>Edit company</h2>
+        </div>
+    <div class="company_form">
             <div class="form-group row">
                 <label for="text" class="col-md-4 col-form-label text-md-right">{{ __('Company name') }}</label>
                 <div class="col-md-6">
@@ -24,6 +27,9 @@
                 </div>
             </div>
             </div>
-        </div>
+            <div class="btns_edit_company">
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
     </div>
+</div>
 @endsection

@@ -58,7 +58,6 @@ figure,
 footer,
 header,
 hgroup,
-main,
 nav,
 section {
   display: block;
@@ -148,7 +147,7 @@ body {
   border-radius: 50%;
 }
 
-.main_history, .main_home, .main_company{
+.main{
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
   margin-left: 12px;
   height: 33rem;
@@ -173,10 +172,8 @@ body {
   color: #702219;
 }
 
-.visit_title p{
+.visit_title h1{
   margin-left: 40px;
-  font-size: 25px;
-  font-weight: normal;
 }
 
 .visit_title{
@@ -186,7 +183,7 @@ body {
 
 .clear_btn{
   display: inline-block;
-  margin-left: 67%;
+  margin-left: 63%;
 }
 
 .clear_btn button{
@@ -200,6 +197,7 @@ body {
 }
 
 table {
+  margin-top: 10px;
   margin-left: 40px;
   width: 89.5%;
   color: white;
@@ -229,7 +227,7 @@ table {
 
 .company_form{
   margin-top: 5rem;
-  margin-right: 30rem;
+  margin-right: 25rem;
 }
 
 .company_form .form-control{
@@ -240,6 +238,63 @@ table {
 .company_form label{
   margin-top: 20px;
 }
+
+.btns_company{
+  margin: 3% 0px 0px 56%;
+}
+
+.btns_edit_company{
+  margin: 3% 0px 0px 56%;
+}
+
+.btns_company button{
+  padding: 5px 30px 5px 30px;
+  margin-left: 6%;
+}
+
+.btns_edit_company button{
+  padding: 5px 30px 5px 30px;
+  margin-left: 10%;
+}
+
+.title_company button{
+  margin-left: 69.2%;
+}
+
+.title_company h2{
+  display: inline-block;
+  vertical-align: middle;
+}
+.title_company{
+  width: 78%;
+  height: 10%;
+  padding-top: 20px;
+  margin: 0px 30px 0px 38px;
+  position: fixed;
+  background-color: white;
+}
+
+.list_companies{
+  margin-top: 80px;
+}
+
+.list_companies dt{
+  width: 97%;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px 0px 15px 0px;
+}
+
+.list_companies a{
+  font-size: larger;
+  font-weight: 500;
+  padding-top: 10px;
+}
+
+.list_companies button{
+  margin-left: 77%;
+}
+
+
 
 h1,
 h2,
@@ -326,14 +381,14 @@ sup {
 }
 
 a {
-  color: #3490dc;
+  color: black;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #1d68a7;
-  text-decoration: underline;
+  color: #702219;
+  text-decoration: none;
 }
 
 a:not([href]) {

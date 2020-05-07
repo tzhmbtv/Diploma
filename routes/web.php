@@ -26,4 +26,8 @@ Route::view('/history', 'history');
 
 Route::view('/team', 'team');
 
-Route::view('/company', 'company');
+Route::view('/companies', 'companies');
+
+Route::view('/new_company', 'new_company');
+
+Route::view('/edit_company', 'edit_company');
