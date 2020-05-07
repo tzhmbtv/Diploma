@@ -17,14 +17,13 @@ class CreateGatesTable extends Migration
             $table->id();
             $table->integer('number');
             $table->string('name');
-            $table->unsignedBigInteger('address_id');
-            $table->string('photo_uri');
+            $table->unsignedBigInteger('office_id');
             $table->string('client_hash')->unique();
             $table->timestamps();
 
-            $table->foreign('address_id')
+            $table->foreign('office_id')
                 ->references('id')
-                ->on('addresses')
+                ->on('offices')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });

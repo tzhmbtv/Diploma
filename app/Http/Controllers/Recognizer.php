@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Car;
 use App\Models\Car\Enter;
 use App\Models\Gate;
 use App\Services\Recognition;
 use App\Services\RequestLogger;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Exception;
 
@@ -17,7 +18,7 @@ class Recognizer extends Controller
     {
         try {
             $hash  = $request->header('hash');
-            $image = $request->get('car_image');
+            $image = $request->file('car_image')->get();
 
             $gate   = $this->getGateByClientHash($hash);
             $number = $this->getNumber($image);
@@ -47,10 +48,9 @@ class Recognizer extends Controller
 
     public function isAvailableToEnter($number, int $gateId)
     {
-        $car = $this->findCarOrCreate($gateId, $number);
-
-        $hasAccessToGate = $car->has_access === '1';
-        $this->logEnteringCarToGate($car->id, intval($car->has_access), $gateId);
+        $car             = $this->findCarOrFail($gateId, $number);
+        $hasAccessToGate = $car->has_access === 1;
+        $this->logEnteringCarToGate($car->id, $car->has_access, $gateId);
 
         return $hasAccessToGate;
     }
@@ -64,16 +64,22 @@ class Recognizer extends Controller
         $enter->save();
     }
 
-    private function findCarOrCreate($gateId, $plateNumber)
+    /**
+     * @param $gateId
+     * @param $plateNumber
+     *
+     * @return Model
+     * @throws Exception
+     */
+    private function findCarOrFail($gateId, $plateNumber)
     {
-        $car = Gate::find($gateId)->cars()
-            ->where('plate_number', '=', $plateNumber)->first();
+        $car = DB::table('cars')
+            ->leftJoin('car_gate', 'cars.id', '=', 'car_gate.car_id')
+            ->where('cars.plate_number', '=', $plateNumber)
+            ->where('car_gate.gate_id', '=', $gateId)->first();
 
         if (!$car) {
-            $car = new Car();
-            $car->setAttribute('plate_number', $plateNumber);
-            $car->setAttribute('origin_gate_id', $gateId);
-            $car->save();
+            throw new Exception('Нет машины c таким номером и доступом к воротам');
         }
 
         return $car;

@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ConnectException;
-use Illuminate\Support\Facades\Log;
 
 class Recognition
 {
