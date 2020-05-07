@@ -40,12 +40,11 @@ class DatabaseSeeder extends Seeder
             ]);
 
             DB::table('gates')->insert([
-                'number'     => '1',
-                'name'       => 'Входные ворота',
-                'address_id' => '1',
-                'camera_ip'  => 'http://192.168.1.109:8080/',
-                'sensor_ip'  => '192.168.1.100',
-                'photo_uri'  => 'photo.jpg',
+                'number'      => '1',
+                'name'        => 'Входные ворота',
+                'address_id'  => '1',
+                'photo_uri'   => 'photo.jpg',
+                'client_hash' => md5('48-5F-99-BC-AF-3B'),
             ]);
         }
 

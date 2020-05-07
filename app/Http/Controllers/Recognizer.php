@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\Car\Enter;
 use App\Models\Gate;
-use App\Services\Camera;
 use App\Services\Recognition;
 use App\Services\RequestLogger;
 use Illuminate\Http\Request;
@@ -14,18 +13,14 @@ use Exception;
 
 class Recognizer extends Controller
 {
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
     public function recognizeAction(Request $request)
     {
         try {
-            $sensor_ip = $request->getClientIp();
-            $gate      = $this->getGateBySensorIp($sensor_ip);
-            $image     = $this->getImage($gate);
-            $number    = $this->getNumber($image);
+            $hash  = $request->header('hash');
+            $image = $request->get('car_image');
+
+            $gate   = $this->getGateByClientHash($hash);
+            $number = $this->getNumber($image);
 
             RequestLogger::logRequestToNpr($gate->id, $number, $image);
 
@@ -42,24 +37,12 @@ class Recognizer extends Controller
         return 'Error';
     }
 
-    /**
-     * @param $image
-     *
-     * @return string[]
-     */
     private function getNumber($image)
     {
         $recognizer = new Recognition();
         $recognizer->setImage($image);
 
         return $recognizer->getNumber();
-    }
-
-    private function getImage(Gate $gate)
-    {
-        $camera = new Camera($gate);
-
-        return $camera->getImage();
     }
 
     public function isAvailableToEnter($number, int $gateId)
@@ -90,13 +73,14 @@ class Recognizer extends Controller
             $car = new Car();
             $car->setAttribute('plate_number', $plateNumber);
             $car->setAttribute('origin_gate_id', $gateId);
+            $car->save();
         }
 
         return $car;
     }
 
-    private function getGateBySensorIp(string $sensor_ip): Gate
+    private function getGateByClientHash(string $hash): Gate
     {
-        return Gate::query()->where('sensor_ip', '=', $sensor_ip)->firstOrFail();
+        return Gate::query()->where('client_hash', '=', $hash)->firstOrFail();
     }
 }
