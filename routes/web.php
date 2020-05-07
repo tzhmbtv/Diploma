@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('auth/login');
 });
-Route::get('/recognize', 'Recognizer@recognizeAction');
+Route::post('/recognize', 'Recognizer@recognizeAction');
 
 Auth::routes();
 

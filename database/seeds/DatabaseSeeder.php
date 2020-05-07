@@ -43,8 +43,19 @@ class DatabaseSeeder extends Seeder
                 'number'      => '1',
                 'name'        => 'Входные ворота',
                 'address_id'  => '1',
-                'photo_uri'   => 'photo.jpg',
                 'client_hash' => md5('48-5F-99-BC-AF-3B'),
+            ]);
+
+            DB::table('cars')->insert([
+                'plate_number'   => '444BOP02',
+                'origin_gate_id' => 1,
+            ]);
+
+
+            DB::table('car_gate')->insert([
+                'has_access' => true,
+                'gate_id'    => 1,
+                'car_id'     => 1,
             ]);
         }
 
