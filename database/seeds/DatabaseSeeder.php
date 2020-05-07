@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
                 'official_name' => 'ТОО Редпрайс',
             ]);
 
-            DB::table('addresses')->insert([
+            DB::table('offices')->insert([
                 'full_address' => 'Байзакова 280',
                 'company_id'   => '1',
             ]);
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             DB::table('gates')->insert([
                 'number'      => '1',
                 'name'        => 'Входные ворота',
-                'address_id'  => '1',
+                'office_id'  => '1',
                 'client_hash' => md5('48-5F-99-BC-AF-3B'),
             ]);
 
