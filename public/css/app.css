@@ -168,11 +168,17 @@ body {
   background: black;
 }
 
+.history_head{
+  width: 78%;
+  height: 10%;
+  background-color: white;
+  position: fixed;
+}
 .visit_title span{
   color: #702219;
 }
 
-.visit_title h1{
+.visit_title h2{
   margin-left: 40px;
 }
 
@@ -183,7 +189,7 @@ body {
 
 .clear_btn{
   display: inline-block;
-  margin-left: 63%;
+  margin-left: 68.3%;
 }
 
 .clear_btn button{
@@ -197,21 +203,12 @@ body {
 }
 
 table {
-  margin-top: 10px;
+  margin-top: 80px;
   margin-left: 40px;
   width: 89.5%;
-  color: white;
+  color: black;
  }
  
- td, th {
-  height: 30px;
-  background-color: #eeeeee;
-  color: black;
-  padding: 5px;
-  border-top: 5px solid white;
-  text-align: center;
- }
-
  tr,th {
    text-align: center;
  }
@@ -258,7 +255,7 @@ table {
 }
 
 .title_company button{
-  margin-left: 69.2%;
+  margin-left: 68.5%;
 }
 
 .title_company h2{
