@@ -20,4 +20,6 @@ Route::view('/history', 'history');
 Route::view('/team', 'team');
 
 
-Route::resource('companies','CompanyController');
+Route::resource('companies', 'CompanyController');
+Route::resource('offices', 'OfficeController');
+Route::resource('gates', 'GateController');

@@ -22,13 +22,6 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('secret'),
             ]);
 
-            // SZP Admin
-            DB::table('users')->insert([
-                'email'    => 'szp@chocolife.me',
-                'name'     => 'life',
-                'password' => Hash::make('secret'),
-            ]);
-
             DB::table('companies')->insert([
                 'short_name'    => 'Chocolife.me',
                 'official_name' => 'ТОО Редпрайс',
@@ -40,7 +33,6 @@ class DatabaseSeeder extends Seeder
             ]);
 
             DB::table('gates')->insert([
-                'number'      => '1',
                 'name'        => 'Входные ворота',
                 'office_id'  => '1',
                 'client_hash' => md5('48-5F-99-BC-AF-3B'),

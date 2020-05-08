@@ -4,9 +4,7 @@
 @section('content')
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
-            <div class="title_company">
-                <h2>Create new company</h2>
-            </div>
+            <h2>Create new company</h2>
             {{ HTML::ul($errors->all() )}}
 
             <form action="{{ route('companies.store') }}" method="POST">

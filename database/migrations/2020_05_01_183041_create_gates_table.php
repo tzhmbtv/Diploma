@@ -15,7 +15,6 @@ class CreateGatesTable extends Migration
     {
         Schema::create('gates', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
             $table->string('name');
             $table->unsignedBigInteger('office_id');
             $table->string('client_hash')->unique();

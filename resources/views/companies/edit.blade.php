@@ -4,12 +4,9 @@
 @section('content')
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
-            <div class="title_company">
-                <h1>Edit {{ $company->short_name }}</h1>
-            </div>
+            <h1>Edit company</h1>
             {{ HTML::ul($errors->all()) }}
-            {{ Form::model($company, array('action' => array('CompanyController@update', $company->id), 'method' => 'PUT')
-            ) }}
+            {{ Form::model($company, array('action' => array('CompanyController@update', $company->id), 'method' => 'PUT'))}}
 
             <div class="form-group">
                 {{ Form::label('short_name', 'Short Name') }}

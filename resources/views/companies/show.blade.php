@@ -11,15 +11,21 @@
                 {{$company->official_name}}
                 {{$company->short_name}}
                 {{$company->id}}
+                <a class="btn btn-info" href="{{ route('offices.create') }}">Create office</a>
                 <table class="table table-bordered">
                     <tr>
                         <th>No</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                     @foreach ($company->offices as $office)
                         <tr>
                             <td>{{$office->id }}</td>
                             <td>{{ $office->full_address }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ route('offices.show',$office->id) }}">Show</a>
+                                <a class="btn btn-primary" href="{{ route('offices.edit',$office->id) }}">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
