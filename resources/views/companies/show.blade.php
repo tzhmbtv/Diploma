@@ -10,6 +10,19 @@
             <div>
                 {{$company->official_name}}
                 {{$company->short_name}}
+                {{$company->id}}
+                <table class="table table-bordered">
+                    <tr>
+                        <th>No</th>
+                        <th>Address</th>
+                    </tr>
+                    @foreach ($company->offices as $office)
+                        <tr>
+                            <td>{{$office->id }}</td>
+                            <td>{{ $office->full_address }}</td>
+                        </tr>
+                    @endforeach
+                </table>
             </div>
         </div>
     </div>

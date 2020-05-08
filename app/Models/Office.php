@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Address extends Model
+class Office extends Model
 {
     //
 }
