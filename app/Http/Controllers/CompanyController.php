@@ -42,10 +42,9 @@ class CompanyController extends Controller
         ]);
 
         Company::create($request->all());
-
         $request->session()->flash('Successfully created company!');
 
-        return Redirect::to('companies');
+        return Redirect::to(route('companies.index'));
     }
 
     /**
@@ -59,7 +58,8 @@ class CompanyController extends Controller
     {
         $company = Company::find($id);
 
-        return view('companies.show', compact('company', $company));
+        return view('companies.show')
+            ->with('company', $company);
     }
 
     /**

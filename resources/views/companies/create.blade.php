@@ -9,22 +9,21 @@
             </div>
             {{ HTML::ul($errors->all() )}}
 
-            {{ Form::open(array('url' => 'company')) }}
+            <form action="{{ route('companies.store') }}" method="POST">
 
-            <div class="form-group">
-                {{ Form::label('short_name', 'Short Name') }}
-                {{ Form::text('short_name', Request::old('short_name'), array('class' => 'form-control')) }}
-            </div>
+                <div class="form-group">
+                    {{ Form::label('short_name', 'Short Name') }}
+                    {{ Form::text('short_name', Request::old('short_name'), array('class' => 'form-control')) }}
+                </div>
 
-            <div class="form-group">
-                {{ Form::label('official_name', 'Official Name') }}
-                {{ Form::email('official_name', Request::old('official_name'), array('class' => 'form-control')) }}
-            </div>
+                <div class="form-group">
+                    {{ Form::label('official_name', 'Official Name') }}
+                    {{ Form::text('official_name', Request::old('official_name'), array('class' => 'form-control')) }}
+                </div>
 
-            {{ Form::submit('Create the Nerd!', array('class' => 'btn btn-primary')) }}
+                {{ Form::submit('Create the Company!', array('class' => 'btn btn-primary')) }}
 
-            {{ Form::close() }}
-
+            </form>
         </div>
     </div>
 @endsection

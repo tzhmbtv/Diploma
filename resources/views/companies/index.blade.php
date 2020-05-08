@@ -18,7 +18,7 @@
             </tr>
             @foreach ($companies as $company)
                 <tr>
-                    <td>{{ ++$i }}</td>
+                    <td>{{ $company->id }}</td>
                     <td>{{ $company->short_name }}</td>
                     <td>{{ $company->official_name }}</td>
                     <td>

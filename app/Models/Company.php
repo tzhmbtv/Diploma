@@ -13,7 +13,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Company extends Model
 {
-    protected $fillable = [
-        'official_name', 'short_name'
+    protected array $fillable = [
+        'official_name',
+        'short_name'
     ];
+
+    public function offices()
+    {
+        return $this->hasMany('App\Models\Office', 'company_id', 'id')->orderBy('id');
+    }
 }
