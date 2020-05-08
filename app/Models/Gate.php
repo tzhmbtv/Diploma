@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  */
 class Gate extends Model
 {
-    protected array $fillable = ['name', 'office_id', 'client_hash'];
+    protected $fillable = ['name', 'office_id', 'client_hash'];
 
     public function cars()
     {

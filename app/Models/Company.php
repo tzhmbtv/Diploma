@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Company extends Model
 {
-    protected array $fillable = [
+    protected  $fillable = [
         'official_name',
         'short_name'
     ];

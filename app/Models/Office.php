@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Office extends Model
 {
-    protected array $fillable = ['full_address', 'company_id'];
+    protected $fillable = ['full_address', 'company_id'];
 
     public function company()
     {
