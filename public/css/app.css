@@ -255,10 +255,11 @@ table {
 }
 
 .title_companies a{
-  margin-left: 56%;
+  margin-left: 46%;
 }
 
 .title_companies h2{
+  width: 300px;
   margin-left: 38px;
   display: inline-block;
   vertical-align: middle;
