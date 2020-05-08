@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,22 +13,11 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('auth/login');
-});
-Route::post('/recognize', 'Recognizer@recognizeAction');
-
 Auth::routes();
-
+Route::post('/recognize', 'Recognizer@recognizeAction');
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::view('/history', 'history');
-
 Route::view('/team', 'team');
 
-Route::view('/companies', 'companies');
 
-Route::view('/new_company', 'new_company');
-
-Route::view('/edit_company', 'edit_company');
+Route::resource('companies','CompanyController');

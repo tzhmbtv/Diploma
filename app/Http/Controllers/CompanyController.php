@@ -2,59 +2,111 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Company;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class CompanyController extends Controller
 {
-    public function __construct()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return View
+     */
+    public function index()
     {
-        $this->middleware('auth')->except(['create']);
+        $companies = Company::latest()->paginate(5);
+
+        return view('companies.index', compact('companies'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
-     * @param Request $request
+     * Show the form for creating a new resource.
+     *
+     * @return View
      */
-    public function create(Request $request)
+    public function create()
     {
-        $this->validateRequestForCreate($request);
-        $this->store($request);
+        return view('companies/create');
     }
 
-    public function getCompany(Request $request)
+    public function store(Request $request)
     {
-        $this->validateCompanyId($request);
+        $request->validate([
+            'short_name'    => 'required',
+            'official_name' => 'required',
+        ]);
 
-        $companyId = (integer) $request->get('company_id');
-        $this->getSingleCompany($companyId);
+        Company::create($request->all());
+
+        $request->session()->flash('Successfully created company!');
+
+        return Redirect::to('companies');
     }
 
     /**
-     * @param Request $request
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return View
      */
-    private function validateRequestForCreate(Request $request)
+    public function show($id)
     {
-        $request->validate(Company::$rules);
+        $company = Company::find($id);
+
+        return view('companies.show', compact('company', $company));
     }
 
     /**
-     * @param Request $request
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return View
      */
-    private function store(Request $request)
+    public function edit($id)
     {
-        $company = new Company();
-        $company->setShortName($request->get('short_name'));
-        $company->setOfficialName($request->get('official_name'));
-        $company->save();
+        $company = Company::find($id);
+
+        return view('companies.edit', compact('company', $company));
     }
 
-    private function validateCompanyId(Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return RedirectResponse
+     */
+    public function update(Request $request, $id)
     {
-        $request->validate(['id' => 'integer|required']);
+        $request->validate([
+            'short_name'    => 'required',
+            'official_name' => 'required',
+        ]);
+
+        $company = Company::find($id);
+        $company->update($request->all());
+
+        $request->session()->flash('Successfully updated company!');
+
+        return Redirect::to('companies');
     }
 
-    private function getSingleCompany(int $companyId)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function destroy($id)
     {
-        Company::find($companyId);
     }
 }
