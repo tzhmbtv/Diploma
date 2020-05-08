@@ -25,7 +25,7 @@
                     <td>{{ $office->id }}</td>
                     <td>{{ $office->full_address }}</td>
                     <td>
-                        <a class="btn btn-info" href="{{ route('offices.show',$office->id) }}">Show</a>
+                        <a class="btn btn-primary" href="{{ route('offices.show',$office->id) }}">Show</a>
                         <a class="btn btn-primary" href="{{ route('offices.edit',$office->id) }}">Edit</a>
                     </td>
                 </tr>

@@ -6,8 +6,8 @@
         <div class="main col-sm col-md col-lg col-xl">
             <div class="show_title_gates">
                 <h4>
-                    {{$gate->id}}
-                    {{$gate->name}}
+                    <!-- {{$gate->id}} -->
+                    {{$gate->name}} -
                     {{$gate->office->full_address}}
                 </h4>
                 <a class="btn btn-primary" href="{{ route('gates.create') }}">Create Gate</a>
@@ -23,7 +23,7 @@
                         <td>{{$car->id }}</td>
                         <td>{{ $car->plate_number }}</td>
                         <td>
-                            <a class="btn btn-info" href="{{ route('cars.show',$car->id) }}">Show</a>
+                            <a class="btn btn-primary" href="{{ route('cars.show',$car->id) }}">Show</a>
                             <a class="btn btn-primary" href="{{ route('cars.edit',$car->id) }}">Edit</a>
                         </td>
                     </tr>

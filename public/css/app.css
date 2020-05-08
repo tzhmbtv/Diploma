@@ -223,13 +223,12 @@ table {
 }
 
 .company_form{
-  margin-top: 5rem;
+  margin-top: 2rem;
   margin-right: 25rem;
 }
 
 .company_form .form-control{
   width: 150%;
-  margin-top: 20px;
 }
 
 .company_form label{
@@ -255,7 +254,8 @@ table {
 }
 
 .title_companies a{
-  margin-left: 46%;
+  width: 200px;
+  margin-left: 45%;
 }
 
 .title_companies h2{
@@ -266,15 +266,20 @@ table {
 }
 
 .title_companies{
-  width: 78%;
+  width: 90%;
   height: 10%;
   padding-top: 20px;
   background-color: white;
 }
 
 .company_form .form-group{
+  padding: 0px;
   width: 50%;
   margin-left: 10%;
+}
+
+.company_form h4{
+  margin-left: 70px;
 }
 
 .company_form .btn{
@@ -297,7 +302,7 @@ table {
 
 .show_title{
   margin-top: 10px;
-  width: 80%;
+  width: 90%;
   height: 8%;
   padding-top: 10px;
   position: fixed;
@@ -319,12 +324,13 @@ table {
 }
 
 .show_title a{
-  margin-left: 61%;
+  width: 200px;
+  margin-left: 45%;
 }
 
-.show_title_gates{
+.show_title_gates, .show_title_cars{
   margin-top: 10px;
-  width: 80%;
+  width: 90%;
   height: 8%;
   padding-top: 10px;
   position: fixed;
@@ -339,10 +345,21 @@ table {
 }
 
 .show_title_gates a{
-  width: 120px;
-  margin-left: 318%;
+  width: 200px;
+  margin-left: 45%;
 }
 
+.show_title_cars a{
+  width: 200px;
+  margin-left: 45%;
+}
+
+.show_title_cars h4{
+  width: 200px;
+  margin-left: 38px;
+  display: inline-block;
+  vertical-align: middle;
+}
 h1,
 h2,
 h3,

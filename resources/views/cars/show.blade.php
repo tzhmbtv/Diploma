@@ -5,15 +5,12 @@
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
             <div class="show_title_cars">
-                <h4>
-                    {{$car->id}}
+                <h4> Gates of 
+                    {{$car->id}} -
                     {{$car->plate_number}}
                 </h4>
                 <a class="btn btn-primary" href="{{ route('cars.create') }}">Create car</a>
             </div>
-            <h4>
-                Gates of cars
-            </h4>
             <table class="table">
                 <tr>
                     <th>No</th>

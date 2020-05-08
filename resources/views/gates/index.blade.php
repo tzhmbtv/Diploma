@@ -11,7 +11,7 @@
         <div class="main col-sm col-md col-lg col-xl">
             <div class="title_companies">
                 <h2>List of gates</h2>
-                <a class="btn btn-primary" href="{{ route('gates.create') }}"> Create New Company</a>
+                <a class="btn btn-primary" href="{{ route('gates.create') }}"> Create New Gate</a>
             </div>
         <table class="table">
             <tr>
