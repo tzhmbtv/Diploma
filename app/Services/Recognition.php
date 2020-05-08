@@ -14,7 +14,7 @@ class Recognition
     public function __construct()
     {
         $this->client = new Client(
-            ['base_uri' => getenv('RECOGNIZER_HOST').":".getenv("RECOGNIZER_PORT")]
+            ['base_uri' => "nrp.hopto.org:5000"]
         );
         $this->setHeader();
     }
@@ -26,7 +26,7 @@ class Recognition
 
     private function setHeader()
     {
-        $this->header = ['x-api-key' => getenv('RECOGNIZER_KEY')];
+        $this->header = ['x-api-key' => 'fc5e038d38a57032085441e7fe7010b0'];
     }
 
     /**

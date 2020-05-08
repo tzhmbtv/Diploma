@@ -19,7 +19,7 @@ class CreateCarGateTable extends Migration
             $table->unsignedBigInteger('gate_id');
             $table->boolean('has_access');
             $table->timestamps();
-
+            $table->unique(['car_id', 'gate_id']);
             $table->foreign('car_id')
                 ->references('id')
                 ->on('cars')

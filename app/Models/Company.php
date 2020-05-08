@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Company extends Model
 {
-    protected  $fillable = [
+    protected $fillable = [
         'official_name',
-        'short_name'
+        'short_name',
     ];
 
     public function offices()

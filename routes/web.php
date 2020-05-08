@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 Route::post('/recognize', 'Recognizer@recognizeAction');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::view('/history', 'history');
 Route::view('/team', 'team');
 
 
 Route::resource('companies', 'CompanyController');
 Route::resource('offices', 'OfficeController');
 Route::resource('gates', 'GateController');
+Route::resource('cars', 'CarController');
+Route::get('/history', 'HomeController@entersAction');

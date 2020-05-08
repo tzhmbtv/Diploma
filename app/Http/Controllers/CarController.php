@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
+use App\Models\Car\Enter;
 use App\Models\Gate;
-use App\Models\Office;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
-class GateController extends Controller
+class CarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +20,9 @@ class GateController extends Controller
      */
     public function index()
     {
-        $gates = Gate::latest()->paginate(5);
+        $cars = Car::latest()->paginate(5);
 
-        return view('gates.index', compact('gates'))
+        return view('cars.index', compact('cars'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -32,23 +33,29 @@ class GateController extends Controller
      */
     public function create()
     {
-        $offices = Office::all();
+        $gates = Gate::all();
 
-        return view('gates/create', compact('offices', $offices));
+        return view('cars/create', compact('gates', $gates));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name'        => 'required',
-            'client_hash' => 'required',
-            'office_id'   => 'required|integer',
+            'plate_number' => 'required',
+            'gates'        => 'required|array',
         ]);
-        $request->offsetSet('client_hash', md5($request->get('client_hash')));
-        Gate::create($request->all());
-        $request->session()->flash('Successfully created gate!');
 
-        return Redirect::to(route('gates.index'));
+        $request->offsetSet('client_hash', md5($request->get('client_hash')));
+
+        $car = new Car();
+        $car->setAttribute('plate_number', $request->get('plate_number'));
+        $car->save();
+
+        foreach ($request->get('gates') as $gate_id) {
+            $car->gates()->attach($gate_id, ['has_access' => 1]);
+        }
+
+        return Redirect::to(route('cars.index'));
     }
 
     /**
@@ -60,10 +67,10 @@ class GateController extends Controller
      */
     public function show($id)
     {
-        $gate = Gate::find($id);
+        $car = Car::find($id);
 
-        return view('gates.show')
-            ->with('gate', $gate);
+        return view('cars.show')
+            ->with('car', $car);
     }
 
     /**
@@ -75,10 +82,10 @@ class GateController extends Controller
      */
     public function edit($id)
     {
-        $gate    = Gate::find($id);
-        $offices = Office::all();
-
-        $view = view('gates.edit')->with('gate', $gate)->with('offices', $offices);
+        $car   = Car::find($id);
+        $gates = Gate::all();
+        $gates = $gates->merge($car->gates);
+        $view  = view('cars.edit')->with('car', $car)->with('gates', $gates);
 
         return $view;
     }
@@ -94,18 +101,21 @@ class GateController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'        => 'required',
-            'client_hash' => 'required',
-            'office_id'   => 'required|integer',
+            'plate_number' => 'required',
+            'gates'        => 'required|array',
         ]);
-        $request->offsetSet('client_hash', md5($request->get('client_hash')));
 
-        $gate = Gate::find($id);
-        $gate->update($request->all());
+        $car = Car::find($id);
+        $car->setAttribute('plate_number', $request->get('plate_number'));
+        $car->save();
 
-        $request->session()->flash('Successfully updated gate!');
+        foreach ($request->get('gates') as $gate_id) {
+            $car->gates()->attach($gate_id, ['has_access' => 1]);
+        }
 
-        return Redirect::to('gates');
+        $request->session()->flash('Successfully updated car!');
+
+        return Redirect::to('cars');
     }
 
     /**

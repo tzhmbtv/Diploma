@@ -15,77 +15,27 @@
             <div class="table">
                 <table>
                     <tr>
-                        <th>Name</th>
-                        <th>Date</th>
+                        <th>Gate</th>
                         <th>Plate Number</th>
                         <th>Status</th>
+                        <th>Date</th>
                     </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
-                    <tr>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                        <td>Ячейка 3</td>
-                        <td>Ячейка 4</td>
-                    </tr>
+                    @foreach($enters as $enter)
+                        <tr>
+                            <td>
+                                {{$enter->gate->name}}
+                            </td>
+                            <td>
+                                {{$enter->car->plate_number}}
+                            </td>
+                            <td>
+                                {{$enter->has_entered}}
+                            </td>
+                            <td>
+                                {{$enter->created_at}}
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

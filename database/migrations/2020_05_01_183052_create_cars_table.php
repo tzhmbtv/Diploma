@@ -16,7 +16,6 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('plate_number')->unique();
-            $table->bigInteger('origin_gate_id')->nullable(true);
             $table->timestamps();
         });
     }

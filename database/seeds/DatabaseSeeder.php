@@ -40,7 +40,6 @@ class DatabaseSeeder extends Seeder
 
             DB::table('cars')->insert([
                 'plate_number'   => '444BOP02',
-                'origin_gate_id' => 1,
             ]);
 
 

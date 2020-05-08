@@ -18,7 +18,7 @@ class Gate extends Model
 
     public function cars()
     {
-        return $this->belongsToMany('App\Models\Car');
+        return $this->belongsToMany('App\Models\Car')->withPivot('has_access');
     }
 
     public function office()
