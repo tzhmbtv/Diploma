@@ -254,44 +254,94 @@ table {
   margin-left: 10%;
 }
 
-.title_company button{
-  margin-left: 68.5%;
+.title_companies a{
+  margin-left: 56%;
 }
 
-.title_company h2{
+.title_companies h2{
+  margin-left: 38px;
   display: inline-block;
   vertical-align: middle;
 }
-.title_company{
+
+.title_companies{
   width: 78%;
   height: 10%;
   padding-top: 20px;
-  margin: 0px 30px 0px 38px;
   position: fixed;
   background-color: white;
 }
 
-.list_companies{
-  margin-top: 80px;
+.company_form .form-group{
+  width: 50%;
+  margin-left: 10%;
 }
 
-.list_companies dt{
-  width: 97%;
-  border-bottom: 1px solid lightgrey;
-  padding: 10px 0px 15px 0px;
+.company_form .btn{
+  margin: 20px 0px 0px 63%;
 }
 
-.list_companies a{
-  font-size: larger;
-  font-weight: 500;
+.company_form .btn2{
+  margin: 20px 0px 0px 65%;
+}
+
+.company_form .btn3{
+  margin: 20px 0px 0px 69%;
+}
+
+.table a{
+  padding: 3px 8px 3px 8px;
+  background-color: white;
+  color: black;
+}
+
+.show_title{
+  margin-top: 10px;
+  width: 80%;
+  height: 8%;
   padding-top: 10px;
+  position: fixed;
+  background-color: white;
 }
 
-.list_companies button{
-  margin-left: 77%;
+.show_title h2{
+  width: 250px;
+  margin-left: 38px;
+  display: inline-block;
+  vertical-align: top;
 }
 
+.show_title h4{
+  width: 200px;
+  margin-left: 38px;
+  display: inline-block;
+  vertical-align: top;
+}
 
+.show_title a{
+  margin-left: 61%;
+}
+
+.show_title_gates{
+  margin-top: 10px;
+  width: 80%;
+  height: 8%;
+  padding-top: 10px;
+  position: fixed;
+  background-color: white;
+}
+
+.show_title_gates h4{
+  width: 200px;
+  margin-left: 38px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.show_title_gates a{
+  width: 120px;
+  margin-left: 318%;
+}
 
 h1,
 h2,
@@ -787,7 +837,7 @@ pre code {
   margin-left: 200px;
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   .container {
     max-width: 540px;
   }
@@ -809,7 +859,7 @@ pre code {
   .container {
     max-width: 1140px;
   }
-}
+} */
 
 .container-fluid,
 .container-xl,
@@ -2850,7 +2900,7 @@ textarea.form-control.is-invalid {
   }
 }
 
-.btn {
+.btn, .btn2, .btn3 {
   display: inline-block;
   font-weight: 400;
   color: #212529;

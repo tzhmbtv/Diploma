@@ -8,8 +8,12 @@
         </div>
     @endif
     <div class="container">
-        <a class="btn btn-success" href="{{ route('companies.create') }}"> Create New Company</a>
-        <table class="table table-bordered">
+        <div class="main col-sm col-md col-lg col-xl">
+            <div class="title_companies">
+                <h2>List of companies</h2>
+                <a class="btn btn-primary" href="{{ route('companies.create') }}"> Create New Company</a>
+            </div>
+        <table class="table">
             <tr>
                 <th>No</th>
                 <th>Short Name</th>
@@ -22,11 +26,12 @@
                     <td>{{ $company->short_name }}</td>
                     <td>{{ $company->official_name }}</td>
                     <td>
-                        <a class="btn btn-info" href="{{ route('companies.show',$company->id) }}">Show</a>
+                        <a class="btn btn-primary" href="{{ route('companies.show',$company->id) }}">Show</a>
                         <a class="btn btn-primary" href="{{ route('companies.edit',$company->id) }}">Edit</a>
                     </td>
                 </tr>
             @endforeach
         </table>
+        </div>
     </div>
 @endsection

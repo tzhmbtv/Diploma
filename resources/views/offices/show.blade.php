@@ -3,16 +3,15 @@
 
 @section('content')
     <div class="container">
-        <div class="pull-right">
+        <!-- <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('offices.index') }}"> Back</a>
-        </div>
+        </div> -->
         <div class="main col-sm col-md col-lg col-xl">
-            <div>
-                {{$office->id}}
-                {{$office->full_address}}
-                {{$office->company->official_name}}
-                <a class="btn btn-info" href="{{ route('gates.create') }}">Create Gate</a>
-                <table class="table table-bordered">
+            <div class="show_title">
+            <h4>{{$office->full_address}} - {{$office->company->official_name}}</h4>
+                <a class="btn btn-primary" href="{{ route('gates.create') }}">Create Gate</a>
+            </div>
+                <table class="table">
                     <tr>
                         <th>No</th>
                         <th>Name</th>
@@ -25,13 +24,12 @@
                             <td>{{ $gate->name }}</td>
                             <td>{{ $gate->client_hash }}</td>
                             <td>
-                                <a class="btn btn-info" href="{{ route('gates.show',$gate->id) }}">Show</a>
+                                <a class="btn btn-primary" href="{{ route('gates.show',$gate->id) }}">Show</a>
                                 <a class="btn btn-primary" href="{{ route('gates.edit',$gate->id) }}">Edit</a>
                             </td>
                         </tr>
                     @endforeach
                 </table>
-            </div>
         </div>
     </div>
 @endsection

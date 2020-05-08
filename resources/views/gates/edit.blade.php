@@ -4,9 +4,12 @@
 @section('content')
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
-            <h1>Edit gate</h1>
+            <div class="title_companies">
+                <h2>Edit gate</h2>
+            </div>
             {{ HTML::ul($errors->all()) }}
-            <form action="{{ route('gates.update', $gate->id) }}" method="PUT">
+            <div class="company_form">
+                <form action="{{ route('gates.update', $gate->id) }}" method="PUT">
                 <div class="form-group">
                     {{ Form::label('name', 'Name') }}
                     {{ Form::text('name', $gate->name, ['class' => 'form-control']) }}
@@ -29,8 +32,9 @@
                         @endforeach
                     </select>
                 </div>
-                {{ Form::submit('Edit the Company!', ['class' => 'btn btn-primary']) }}
+                {{ Form::submit('Edit the gate', ['class' => 'btn3 btn-primary']) }}
             </form>
+            </div>
         </div>
     </div>
 @endsection

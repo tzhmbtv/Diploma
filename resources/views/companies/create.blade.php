@@ -4,9 +4,12 @@
 @section('content')
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
-            <h2>Create new company</h2>
+            <div class="title_companies">
+                <h2>Create new company</h2>
+            </div>
             {{ HTML::ul($errors->all() )}}
 
+            <div class="company_form">
             <form action="{{ route('companies.store') }}" method="POST">
 
                 <div class="form-group">
@@ -19,9 +22,10 @@
                     {{ Form::text('official_name', Request::old('official_name'), array('class' => 'form-control')) }}
                 </div>
 
-                {{ Form::submit('Create the Company!', array('class' => 'btn btn-primary')) }}
+                    {{ Form::submit('Create the Company', array('class' => 'btn btn-primary')) }}
 
             </form>
+            </div>
         </div>
     </div>
 @endsection

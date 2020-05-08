@@ -4,9 +4,12 @@
 @section('content')
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
-            <h2>Create new gate</h2>
+            <div class="title_companies">
+                <h2>Create new gate</h2>
+            </div>
             {{ HTML::ul($errors->all() )}}
 
+            <div class="company_form">
             <form action="{{ route('gates.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -32,9 +35,10 @@
                     </select>
                 </div>
 
-                {{ Form::submit('Create the Gate!', array('class' => 'btn btn-primary')) }}
+                {{ Form::submit('Create the Gate', array('class' => 'btn2 btn-primary')) }}
 
             </form>
+            </div>
         </div>
     </div>
 @endsection
