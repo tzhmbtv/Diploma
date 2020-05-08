@@ -25,6 +25,30 @@
                     <dt><a href="{{ url('/company_info') }}">Company number 1</a>
                     <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
                     </dt>
+                    <dt><a href="{{ url('/company_info') }}">Company number 1</a>
+                    <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
+                    </dt>
+                    <dt><a href="{{ url('/company_info') }}">Company number 1</a>
+                    <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
+                    </dt>
+                    <dt><a href="{{ url('/company_info') }}">Company number 1</a>
+                    <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
+                    </dt>
+                    <dt><a href="{{ url('/company_info') }}">Company number 1</a>
+                    <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
+                    </dt>
+                    <dt><a href="{{ url('/company_info') }}">Company number 1</a>
+                    <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
+                    </dt>
+                    <dt><a href="{{ url('/company_info') }}">Company number 1</a>
+                    <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
+                    </dt>
+                    <dt><a href="{{ url('/company_info') }}">Company number 1</a>
+                    <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
+                    </dt>
+                    <dt><a href="{{ url('/company_info') }}">Company number 1</a>
+                    <span><a href="{{ url('/edit_company') }}"><button type="submit" class="btn btn-primary">Edit</button></a></span>
+                    </dt>
                 </ul>
             </div>
         </div>
