@@ -18,10 +18,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::latest()->paginate(5);
+        $companies = Company::all();
 
-        return view('companies.index', compact('companies'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('companies.index')->with('companies', $companies);
     }
 
     /**
@@ -42,7 +41,6 @@ class CompanyController extends Controller
         ]);
 
         Company::create($request->all());
-        $request->session()->flash('Successfully created company!');
 
         return Redirect::to(route('companies.index'));
     }

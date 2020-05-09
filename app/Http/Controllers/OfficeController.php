@@ -19,10 +19,9 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        $offices = Office::latest()->paginate(5);
+        $offices = Office::all();
 
-        return view('offices.index', compact('offices'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('offices.index')->with('offices', $offices);
     }
 
     /**

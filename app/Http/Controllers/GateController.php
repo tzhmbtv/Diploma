@@ -19,10 +19,9 @@ class GateController extends Controller
      */
     public function index()
     {
-        $gates = Gate::latest()->paginate(5);
+        $gates = Gate::all();
 
-        return view('gates.index', compact('gates'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('gates.index')->with('gates', $gates);
     }
 
     /**
