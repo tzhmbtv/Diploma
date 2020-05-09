@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function entersAction()
     {
-        $enters = Enter::all();
+        $enters = Enter::all()->sortByDesc('id');
 
         return view('history')->with('enters', $enters);
     }

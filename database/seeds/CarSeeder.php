@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Car;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,10 @@ class CarSeeder extends Seeder
                         .rand(0, 99),
                 ]);
             }
+            $car = new Car();
+            $car->setAttribute('plate_number', '444BOP02');
+            $car->save();
+
             $this->call(CarGateSeeder::class);
         }
     }

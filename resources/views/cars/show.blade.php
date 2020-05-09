@@ -4,14 +4,14 @@
 @section('content')
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
-            <div class="show_title_cars">
-                <h4> Gates of
-                    {{$car->id}} -
-                    {{$car->plate_number}}
+            <div class="show_title">
+                <h4>
+                    Plate Number - {{$car->plate_number}}
                 </h4>
                 <a class="btn btn-primary" href="{{ route('cars.create') }}">Create car</a>
             </div>
             <table class="table">
+                <caption style="caption-side: top; text-align: center">Gates of car</caption>
                 <tr>
                     <th>No</th>
                     <th>Name</th>

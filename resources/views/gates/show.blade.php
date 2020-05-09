@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
-            <div class="show_title_gates">
+            <div class="show_title">
                 <h4>
                     Name of gate - {{$gate->name}}
                 </h4>

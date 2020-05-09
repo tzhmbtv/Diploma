@@ -8,10 +8,16 @@
         </div> -->
         <div class="main col-sm col-md col-lg col-xl">
             <div class="show_title">
-                <h4>{{$office->full_address}} - {{$office->company->official_name}}</h4>
+                <h4>
+                    Address of office - {{$office->full_address}}
+                </h4>
+                <h4>
+                    Name of company - {{$office->company->official_name}}
+                </h4>
                 <a class="btn btn-primary" href="{{ route('gates.create') }}">Create Gate</a>
             </div>
             <table class="table">
+                <caption style="caption-side: top; text-align: center">Gates of office</caption>
                 <tr>
                     <th>No</th>
                     <th>Name</th>

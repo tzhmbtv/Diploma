@@ -25,6 +25,12 @@ class GateSeeder extends Seeder
                     'client_hash' => md5($faker->macAddress),
                 ]);
             }
+
+            DB::table('gates')->insert([
+                'name'        => $faker->streetName,
+                'office_id'   => 1,
+                'client_hash' => '53c626118b567a8c44aaefb3be40c018',
+            ]);
             $this->call(CarSeeder::class);
         }
     }

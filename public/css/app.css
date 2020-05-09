@@ -167,7 +167,7 @@ body {
 .main {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     margin-left: 12px;
-    height: 33rem;
+    height:800px;
     border-radius: 3px;
     background-color: white;
     overflow: auto;
@@ -272,8 +272,8 @@ tr, th {
 }
 
 .title_companies a {
-    width: 200px;
-    margin-left: 45%;
+    position: absolute;
+    right: 20%;
 }
 
 .title_companies h2 {
@@ -318,15 +318,6 @@ tr, th {
     color: black;
 }
 
-.show_title {
-    margin-top: 10px;
-    width: 90%;
-    height: 8%;
-    padding-top: 10px;
-    position: fixed;
-    background-color: white;
-}
-
 .show_title h2 {
     width: 250px;
     margin-left: 38px;
@@ -336,18 +327,12 @@ tr, th {
 
 
 .show_title a {
-    width: 200px;
-    margin-left: 45%;
-}
-
-
-.show_title_gates a {
     position: absolute;
     right: 100px;
 }
 
-.show_title_gates {
-    margin-left: 100px;
+.show_title {
+    margin-left: 40px;
     margin-top: 50px;
 }
 
@@ -11049,6 +11034,10 @@ a.text-dark:focus {
 
 .invisible {
     visibility: hidden !important;
+}
+
+.container {
+    max-width: 1660px !important;
 }
 
 @media print {
