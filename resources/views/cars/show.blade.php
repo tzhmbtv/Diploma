@@ -5,7 +5,7 @@
     <div class="container">
         <div class="main col-sm col-md col-lg col-xl">
             <div class="show_title_cars">
-                <h4> Gates of 
+                <h4> Gates of
                     {{$car->id}} -
                     {{$car->plate_number}}
                 </h4>
@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{$gate->id}}</td>
                         <td>{{ $gate->name }}</td>
-                        <td>{{ $gate->pivot->has_access==1?'TRUE':"FALSE"}}</td>
+                        <td>{{ $gate->pivot->has_access==1?'Yes':"No"}}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('gates.show',$gate->id) }}">Show</a>
                             <a class="btn btn-primary" href="{{ route('gates.edit',$gate->id) }}">Edit</a>

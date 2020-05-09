@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Car\Enter;
 use App\Models\Gate;
 use App\Services\Recognition;
 use App\Services\RequestLogger;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Exception;
 
@@ -48,9 +47,9 @@ class Recognizer extends Controller
 
     public function isAvailableToEnter($number, int $gateId)
     {
-        $car             = $this->findCarOrFail($gateId, $number);
-        $hasAccessToGate = $car->has_access === 1;
-        $this->logEnteringCarToGate($car->id, $car->has_access, $gateId);
+        $car             = $this->findCarOrFail($number);
+        $hasAccessToGate = $car->hasAccessToGate($gateId);
+        $this->logEnteringCarToGate($car->id, $hasAccessToGate, $gateId);
 
         return $hasAccessToGate;
     }
@@ -65,24 +64,13 @@ class Recognizer extends Controller
     }
 
     /**
-     * @param $gateId
      * @param $plateNumber
      *
-     * @return Model
-     * @throws Exception
+     * @return Car
      */
-    private function findCarOrFail($gateId, $plateNumber)
+    private function findCarOrFail($plateNumber)
     {
-        $car = DB::table('cars')
-            ->leftJoin('car_gate', 'cars.id', '=', 'car_gate.car_id')
-            ->where('cars.plate_number', '=', $plateNumber)
-            ->where('car_gate.gate_id', '=', $gateId)->first();
-
-        if (!$car) {
-            throw new Exception('Нет машины c таким номером и доступом к воротам');
-        }
-
-        return $car;
+        return Car::query()->where('plate_number', '=', $plateNumber)->firstOrFail();
     }
 
     private function getGateByClientHash(string $hash): Gate

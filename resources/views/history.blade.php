@@ -8,16 +8,13 @@
                 <div class="visit_title">
                     <h2><span>V</span>isit history</h2>
                 </div>
-                <div class="clear_btn">
-                    <button type="submit" class="btn btn-primary">Clear</button>
-                </div>
             </div>
             <div class="table">
                 <table>
                     <tr>
                         <th>Gate</th>
                         <th>Plate Number</th>
-                        <th>Status</th>
+                        <th>Entered</th>
                         <th>Date</th>
                     </tr>
                     @foreach($enters as $enter)
@@ -29,7 +26,7 @@
                                 {{$enter->car->plate_number}}
                             </td>
                             <td>
-                                {{$enter->has_entered}}
+                                {{$enter->has_entered==1?'Yes':'No'}}
                             </td>
                             <td>
                                 {{$enter->created_at}}

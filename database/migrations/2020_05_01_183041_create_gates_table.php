@@ -18,7 +18,8 @@ class CreateGatesTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('office_id');
             $table->string('client_hash')->unique();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
 
             $table->foreign('office_id')
                 ->references('id')

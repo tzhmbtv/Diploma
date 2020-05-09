@@ -11,19 +11,19 @@
             {{ Form::model($company, array('action' => array('CompanyController@update', $company->id), 'method' => 'PUT'))}}
 
             <div class="company_form">
-            <div class="form-group">
-                {{ Form::label('short_name', 'Short Name') }}
-                {{ Form::text('short_name', Request::old('short_name'), array('class' => 'form-control')) }}
-            </div>
+                <div class="form-group">
+                    {{ Form::label('short_name', 'Short Name') }}
+                    {{ Form::text('short_name', Request::old('short_name'), array('class' => 'form-control')) }}
+                </div>
 
-            <div class="form-group">
-                {{ Form::label('official_name', 'Official Name') }}
-                {{ Form::text('official_name', Request::old('official_name'), array('class' => 'form-control')) }}
-            </div>
+                <div class="form-group">
+                    {{ Form::label('official_name', 'Official Name') }}
+                    {{ Form::text('official_name', Request::old('official_name'), array('class' => 'form-control')) }}
+                </div>
 
-            {{ Form::submit('Edit the Company', array('class' => 'btn2 btn-primary')) }}
+                {{ Form::submit('Edit the Company', array('class' => 'btn2 btn-primary')) }}
 
-            {{ Form::close() }}
+                {{ Form::close() }}
 
             </div>
         </div>

@@ -18,7 +18,8 @@ class CreateRequestsTable extends Migration
             $table->unsignedBigInteger('gate_id');
             $table->longText('request_image_url');
             $table->json('response_from_nrp');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->foreign('gate_id')
                 ->references('id')
                 ->on('gates')

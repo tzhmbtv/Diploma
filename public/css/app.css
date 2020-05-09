@@ -189,7 +189,7 @@ body {
     width: 78%;
     height: 10%;
     background-color: white;
-    position: fixed;
+    position: absolute;
 }
 
 .visit_title span {

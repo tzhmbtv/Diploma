@@ -24,7 +24,8 @@ class CreateOfficesTable extends Migration
                 ->on('companies')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

@@ -18,7 +18,8 @@ class CreateCarGateTable extends Migration
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('gate_id');
             $table->boolean('has_access');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->unique(['car_id', 'gate_id']);
             $table->foreign('car_id')
                 ->references('id')

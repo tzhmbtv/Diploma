@@ -16,26 +16,26 @@
                         {{ Form::text('plate_number', Request::old('short_name'), array('class' => 'form-control')) }}
                     </div>
                     <div class="form-group">
-                            <table class="table">
+                        <table class="table">
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Has access</th>
+                            </tr>
+                            @foreach ($gates as $gate)
                                 <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Has access</th>
+                                    <td>{{$gate->id }}</td>
+                                    <td>{{ $gate->name }}</td>
+                                    <td>
+                                        @if($gate->pivot && $gate->pivot->has_access==1)
+                                            <input type="checkbox" name="gates[]" value="{{$gate->id}}" checked/>
+                                        @else
+                                            <input type="checkbox" name="gates[]" value="{{$gate->id}}"/>
+                                        @endif
+                                    </td>
                                 </tr>
-                                @foreach ($gates as $gate)
-                                    <tr>
-                                        <td>{{$gate->id }}</td>
-                                        <td>{{ $gate->name }}</td>
-                                        <td>
-                                            @if($gate->pivot && $gate->pivot->has_access==1)
-                                                <input type="checkbox" name="gates[]" value="{{$gate->id}}" checked/>
-                                            @else
-                                                <input type="checkbox" name="gates[]" value="{{$gate->id}}"/>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
+                            @endforeach
+                        </table>
                     </div>
                     {{ Form::submit('Edit the car', ['class' => 'btn2 btn-primary']) }}
 

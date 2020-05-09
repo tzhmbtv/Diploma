@@ -86,4 +86,15 @@ class Car extends Model
             }
         }
     }
+
+    public function hasAccessToGate(int $gateId)
+    {
+        foreach ($this->gates as $gate) {
+            if ($gate->id == $gateId && $gate->pivot->has_access == 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

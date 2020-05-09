@@ -17,7 +17,8 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('short_name');
             $table->string('official_name');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

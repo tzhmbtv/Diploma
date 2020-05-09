@@ -17,18 +17,20 @@ class CarGateSeeder extends Seeder
         {
             $faker = Faker\Factory::create();
 
-            for ($i = 0; $i < 15; $i++) {
+            for ($i = 0; $i < 20; $i++) {
                 try {
                     DB::table('car_gate')->insert([
                         'has_access' => $faker->boolean,
-                        'gate_id'    => rand(1,10),
-                        'car_id'     => rand(1,20),
+                        'gate_id'    => rand(1, 10),
+                        'car_id'     => $i+1,
                     ]);
                 } catch (Exception $exception) {
                     continue;
                 }
 
             }
+            $this->call(CarEnterSeeder::class);
+
         }
 
 
