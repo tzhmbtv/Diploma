@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Request
@@ -39,11 +40,14 @@ class Request extends Model
     }
 
     /**
-     * @param string $request_image_url
+     * @param UploadedFile $image
      */
-    public function setRequestImageUrl(string $request_image_url): void
+    public function setRequestImageUrl(UploadedFile $image): void
     {
-        $this->attributes['request_image_url'] = $request_image_url;
+        $imageName = time().'.'.$image->getClientOriginalExtension();
+        $image->move(public_path('gate/'.$this->getGateId().'/enters'), $imageName);
+
+        $this->attributes['request_image_url'] = 'gate/'.$this->getGateId().'/enters/'.$imageName;
     }
 
     /**

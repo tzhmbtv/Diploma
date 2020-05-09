@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use App\Models\Car\Enter;
 use App\Models\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Exception;
 
 class CarController extends Controller
 {
@@ -46,13 +47,16 @@ class CarController extends Controller
         ]);
 
         $request->offsetSet('client_hash', md5($request->get('client_hash')));
-
-        $car = new Car();
-        $car->setAttribute('plate_number', $request->get('plate_number'));
-        $car->save();
-
-        foreach ($request->get('gates') as $gate_id) {
-            $car->gates()->attach($gate_id, ['has_access' => 1]);
+        try {
+            Db::beginTransaction();
+            $car = new Car();
+            $car->setAttribute('plate_number', $request->get('plate_number'));
+            $car->save();
+            $car->createGates($request->get('gates'));
+            Db::commit();
+        } catch (Exception $exception) {
+            Db::rollBack();
+            throw $exception;
         }
 
         return Redirect::to(route('cars.index'));
@@ -102,20 +106,22 @@ class CarController extends Controller
     {
         $request->validate([
             'plate_number' => 'required',
-            'gates'        => 'required|array',
+            'gates'        => 'array',
         ]);
+        try {
+            Db::beginTransaction();
 
-        $car = Car::find($id);
-        $car->setAttribute('plate_number', $request->get('plate_number'));
-        $car->save();
+            $car = Car::find($id);
+            $car->update($request->all());
+            $car->updateGates($request->get('gates'));
 
-        foreach ($request->get('gates') as $gate_id) {
-            $car->gates()->attach($gate_id, ['has_access' => 1]);
+            Db::commit();
+
+            return Redirect::to('cars');
+        } catch (Exception $exception) {
+            Db::rollBack();
+            $request->session()->flash('Successfully updated car!');
         }
-
-        $request->session()->flash('Successfully updated car!');
-
-        return Redirect::to('cars');
     }
 
     /**

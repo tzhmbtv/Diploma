@@ -18,10 +18,10 @@ class Recognizer extends Controller
     {
         try {
             $hash  = $request->header('hash');
-            $image = $request->file('car_image')->get();
+            $image = $request->file('car_image');
 
             $gate   = $this->getGateByClientHash($hash);
-            $number = $this->getNumber($image);
+            $number = $this->getNumber($image->get());
 
             RequestLogger::logRequestToNpr($gate->id, $number, $image);
 
