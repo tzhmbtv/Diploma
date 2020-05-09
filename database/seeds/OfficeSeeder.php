@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class DatabaseSeeder extends Seeder
+class OfficeSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -16,13 +16,14 @@ class DatabaseSeeder extends Seeder
     {
         if (App::environment() === 'local') //development
         {
-            // Admin
-            DB::table('users')->insert([
-                'email'    => 'admin@npr.kz',
-                'name'     => 'Admin',
-                'password' => Hash::make('1234567890'),
-            ]);
-            $this->call(CompanySeeder::class);
+            $faker = Faker\Factory::create();
+            for ($i = 0; $i < 5; $i++) {
+                DB::table('offices')->insert([
+                    'full_address' => $faker->address,
+                    'company_id'   => $i + 1,
+                ]);
+            }
+            $this->call(GateSeeder::class);
         }
 
 
